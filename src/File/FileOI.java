@@ -30,19 +30,16 @@ public class FileOI {
 		}
 		return output;
 	}
-	public static ArrayList<String> fileRead(String path, boolean a) throws IncorrectPathException{
-		ArrayList<String> output = new ArrayList<String>();
-		try(		BufferedReader br = new BufferedReader(new FileReader(getFile(path)));
+	public static byte[] byteRead(String path) throws IncorrectPathException{
+		byte[] output = null;
+		try(		FileInputStream fir = new FileInputStream(getFile(path));
 				){
-		String inputLine;
-		while((inputLine = br.readLine()) != null) {
-			output.add(inputLine);
-		}			
+		output = fir.readAllBytes();
 	} catch (FileNotFoundException e) {
 		throw new IncorrectPathException(e, path);
-	} catch (IOException e1) {
-		e1.printStackTrace();
-	}
+	} catch (IOException e) {
+		e.printStackTrace();
+	} 
 		return output;
 		
 	}
@@ -54,6 +51,7 @@ public class FileOI {
 		}else {
 			f = new File(targetPath);
 		}
+		System.out.println(f.exists());
 		try(
 				FileWriter fw = new FileWriter(f);){
 			fw.write(input);
@@ -61,6 +59,22 @@ public class FileOI {
 			e.printStackTrace();
 		}
 	}
-	
-	
+	public static void byteWrite(byte[] input, String targetPath) throws IncorrectPathException {
+		File f;
+		if(!targetPath.contains("/")) {
+			f = new File(System.getProperty("user.dir") + "/"+ targetPath);
+			
+		}else {
+			f = new File(targetPath);
+		}
+		try(FileOutputStream fos = new FileOutputStream(f, true);){
+			fos.write(input);
+			fos.flush();
+		} catch (FileNotFoundException e) {
+			throw new IncorrectPathException(e, targetPath);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
