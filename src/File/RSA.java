@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package File;
 import java.math.BigInteger;
 import java.util.Random;
@@ -82,6 +81,6 @@ public class RSA {
 	}
 	
 }
-=======
 
->>>>>>> 1c8d673f1ffe84235b9fdf5a225d94195dd835c3
+
+
