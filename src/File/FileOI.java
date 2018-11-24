@@ -1,8 +1,11 @@
 package File;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
+
+
 
 public class FileOI {
 	private static File getFile(String filePath) throws IncorrectPathException {
@@ -17,11 +20,14 @@ public class FileOI {
 		return f;
 	}
 	public static String fileRead(String path) throws IncorrectPathException{
-		String inputLine, output = "";
-		try(		BufferedReader br = new BufferedReader(new FileReader(getFile(path)));
+		String output = "";
+		char[] inputChar = new char[1]; 
+		try(		InputStreamReader isr = new InputStreamReader(new FileInputStream(getFile(path)), StandardCharsets.ISO_8859_1);
 					){
-			while((inputLine = br.readLine()) != null) {
-				output += inputLine + "\n";
+			if((isr.read(inputChar)) != -1)
+				output += inputChar[0];
+			while(isr.read(inputChar) != -1) {
+				output +=  inputChar[0];
 			}			
 		} catch (FileNotFoundException e) {
 			throw new IncorrectPathException(e, path);
@@ -31,10 +37,11 @@ public class FileOI {
 		return output;
 	}
 	public static byte[] byteRead(String path) throws IncorrectPathException{
-		byte[] output = null;
-		try(		FileInputStream fir = new FileInputStream(getFile(path));
+		File f = getFile(path);
+		byte[] output = new byte[(int)f.length()];
+		try(		FileInputStream fir = new FileInputStream(f);
 				){
-		output = fir.readAllBytes();
+		
 	} catch (FileNotFoundException e) {
 		throw new IncorrectPathException(e, path);
 	} catch (IOException e) {
@@ -51,10 +58,12 @@ public class FileOI {
 		}else {
 			f = new File(targetPath);
 		}
-		System.out.println(f.exists());
 		try(
+				OutputStreamWriter fos = new OutputStreamWriter(new FileOutputStream(f), StandardCharsets.ISO_8859_1);
 				FileWriter fw = new FileWriter(f);){
-			fw.write(input);
+			//fw.write(input);
+			fos.write(input);
+			fos.flush();
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
