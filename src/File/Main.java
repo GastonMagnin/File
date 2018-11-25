@@ -9,12 +9,14 @@ public class Main {
 			RSA r = new RSA(1024);
 			String a;
 			byte[] b;
-			a=FileOI.fileRead("abc.txt");
+			a=FileIO.fileRead("abc.txt");
+			
 			String v = r.encryptString(a);
-			System.out.println(v.length());
-			FileOI.fileWrite(v, "cba.txt");
-			a = FileOI.fileRead("cba.txt");
-			System.out.println(r.decryptString(a));
+			
+			FileIO.fileWrite(v, "cba.txt");
+			a = FileIO.fileRead("cba.txt");
+			System.out.println(r.decryptString(v));
+			
 			
 			
 			;

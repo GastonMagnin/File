@@ -3,11 +3,17 @@ package File;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 
 
-public class FileOI {
+
+public class FileIO {
+	/**
+	 * Checks if the given path contains a file and throws exception if not
+	 * @param filePath String that contains the path
+	 * @return	File object with the specified path
+	 * @throws IncorrectPathException thrown if the path does not contain a file
+	 */
 	private static File getFile(String filePath) throws IncorrectPathException {
 		File f;
 		if(!filePath.contains("/")) {
@@ -36,20 +42,6 @@ public class FileOI {
 		}
 		return output;
 	}
-	public static byte[] byteRead(String path) throws IncorrectPathException{
-		File f = getFile(path);
-		byte[] output = new byte[(int)f.length()];
-		try(		FileInputStream fir = new FileInputStream(f);
-				){
-		
-	} catch (FileNotFoundException e) {
-		throw new IncorrectPathException(e, path);
-	} catch (IOException e) {
-		e.printStackTrace();
-	} 
-		return output;
-		
-	}
 	public static void fileWrite(String input, String targetPath) {
 		File f;
 		if(!targetPath.contains("/")) {
@@ -65,24 +57,6 @@ public class FileOI {
 			fos.write(input);
 			fos.flush();
 		}catch(IOException e) {
-			e.printStackTrace();
-		}
-	}
-	public static void byteWrite(byte[] input, String targetPath) throws IncorrectPathException {
-		File f;
-		if(!targetPath.contains("/")) {
-			f = new File(System.getProperty("user.dir") + "/"+ targetPath);
-			
-		}else {
-			f = new File(targetPath);
-		}
-		try(FileOutputStream fos = new FileOutputStream(f, true);){
-			fos.write(input);
-			fos.flush();
-		} catch (FileNotFoundException e) {
-			throw new IncorrectPathException(e, targetPath);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
