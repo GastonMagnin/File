@@ -16,19 +16,8 @@ public class Main {
 			FileIO.fileWrite(v, "cba.txt");
 			a = FileIO.fileRead("cba.txt");
 			System.out.println(r.decryptString(v));
-			
-			
-			
-			;
-			/*a = new String(r.encrypt(a.getBytes()));
-			//System.out.println(a + "apppppp");
-			FileOI.fileWrite(a, "cba.txt");
-			a = FileOI.fileRead("cba.txt");
-			*/
-			
-			
+					
 		} catch (IncorrectPathException e) {
-			System.out.println("error");
 			e.printStackTrace();
 			System.out.println(e.getPath());
 			
