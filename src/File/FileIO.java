@@ -51,9 +51,7 @@ public class FileIO {
 			f = new File(targetPath);
 		}
 		try(
-				OutputStreamWriter fos = new OutputStreamWriter(new FileOutputStream(f), StandardCharsets.ISO_8859_1);
-				FileWriter fw = new FileWriter(f);){
-			//fw.write(input);
+				OutputStreamWriter fos = new OutputStreamWriter(new FileOutputStream(f), StandardCharsets.ISO_8859_1);){
 			fos.write(input);
 			fos.flush();
 		}catch(IOException e) {

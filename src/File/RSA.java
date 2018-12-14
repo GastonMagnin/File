@@ -27,6 +27,19 @@ public class RSA {
 		}while(!(test((int)(Math.random()*Character.MAX_VALUE)) && test(((int)(Math.random() * Character.MAX_VALUE)))));
 	}
 	/**
+	 * Generate a new RSA object with the given bitLength, RSA module and keys
+	 * @param bitLength
+	 * @param e	Encryption Key for this RSA object
+	 * @param d	Decryption Key for this RSA object
+	 * @param n	RSA module for this RSA object 
+	 */
+	public RSA(String bitLength, String e, String d, String n) {
+		this.bitLength = Integer.parseInt(bitLength);
+		this.e = new BigInteger(e);
+		this.d = new BigInteger(d);
+		this.N = new BigInteger(n);
+	}
+	/**
 	 * Generates the keys for RSA encryption with bit length {@link #bitLength}
 	 * @param bitLength the required bitLength for N, this is also the length that anything encrypted with this will have
 	 */
@@ -218,6 +231,11 @@ public class RSA {
 		System.arraycopy(input, 0, temp, padding, temp.length - padding);
 		return temp;
 	}
+	public String getRSAData() {
+		String output = String.valueOf(bitLength) + "," + e.toString() + "," + d.toString() + "," + N.toString();
+		return output;
+	}
+	
 }
 
 
