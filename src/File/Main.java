@@ -15,8 +15,9 @@ public class Main {
 			
 			FileIO.fileWrite(v, "cba.txt");
 			a = FileIO.fileRead("cba.txt");
-			System.out.println(r.decryptString(v));
-			
+			//System.out.println(r.decryptString(v));
+			String c = "forti?";
+			System.out.println(c = r.encryptString(c));
 			
 			
 			;
